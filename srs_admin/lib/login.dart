@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:srs_admin/mainscreen.dart';
 import 'package:srs_admin/registeration.dart';
 
+import 'dart:async';
+import 'package:toast/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() => runApp(MyApp());
+bool rememberMe = false;
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,11 +23,17 @@ class LoginPage extends StatefulWidget {
     _LoginPageState createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> {
+
+  TextEditingController _emailcontroller = new TextEditingController();
+  TextEditingController _passcontroller = new TextEditingController();
+  String urlLogin = "http://itschizo.com/aidil_qayyum/srs/php/login_admin.php";
+  
   @override
   void initState() {
     //loadpref();
    // print('Init: $_email');
     super.initState();
+    this.loadPref();
   }
    @override
   Widget build(BuildContext context) {
@@ -106,8 +117,8 @@ class _LoginPageState extends State<LoginPage> {
                         shadowColor: Colors.blueAccent,
                         color: Colors.lightBlueAccent,
                         elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: MaterialButton(
+                          onPressed: (){},//this._userLogin,
                           child: Center(
                             child: Text(
                               'LOGIN',
@@ -153,6 +164,19 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Checkbox(
+                        value: rememberMe,
+                        onChanged: (bool value) {
+                          _onRememberMeChanged(value);
+                        },
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 15.0, left: 3.0),),
+                      Text('Remember Me ',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                             
                 Text(
                   'New to SRS ?',
                   style: TextStyle(fontFamily: 'Montserrat'),
@@ -164,8 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => RegisterScreen(),
-                              ));
-                  },
+                              ));},
                   child: Text(
                     'Register',
                     style: TextStyle(
@@ -180,6 +203,100 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ));
   }
+  
+  //void _userLogin() async {
+  //  try {
+  //    ProgressDialog pr = new ProgressDialog(context,
+  //        type: ProgressDialogType.Normal, isDismissible: false);
+  //    pr.style(message: "Log in...");
+  //    pr.show();
+  //    String _email = _emailcontroller.text;
+  //    String _password = _passcontroller.text;
+  //    http.post(urlLogin, body: {
+  //      "email": _email,
+  //      "password": _password,
+  //    })
+  //        //.timeout(const Duration(seconds: 4))
+  //        .then((res) {
+  //      print(res.body);
+  //      var string = res.body;
+  //      List admindata = string.split(",");
+  //      if (admindata[0] == "success") {
+  //        Admin _admin = new Admin(
+ //            name: admindata[1],
+ //             email: _email,
+  //            password: _password,
+  //            userid: admindata[2],
+  //            phone: admindata[3],
+  //        pr.dismiss();
+  //        Navigator.push(
+  //            context,
+  //            MaterialPageRoute(
+  //                builder: (BuildContext context) => HomePage(
+  //                      admin: _admin,
+  //                    )));
+  //      } else {
+  //        pr.dismiss();
+  //        Toast.show("Login failed", context,
+  //            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+  //      }
+  //    }).catchError((err) {
+  //      print(err);
+  ///      pr.dismiss();
+  //    });
+  //  } on Exception catch (_) {
+  //    Toast.show("Error", context,
+  //        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+  //  }
+  //}
+
+  void _onRememberMeChanged(bool newValue) => setState(() {
+        rememberMe = newValue;
+        print(rememberMe);
+        if (rememberMe) {
+          savepref(true);
+        } else {
+          savepref(false);
+        }
+      }
+      );
+
+  Future<void> loadPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String email = (prefs.getString('email')) ?? '';
+    String password = (prefs.getString('pass')) ?? '';
+    if (email.length > 1) {
+      setState(() {
+        _emailcontroller.text = email;
+        _passcontroller.text = password;
+        rememberMe = true;
+      });
+    }
+  }
+
+  void savepref(bool value) async {
+    String email = _emailcontroller.text;
+    String password = _passcontroller.text;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (value) {
+      //save preference
+      await prefs.setString('email', email);
+      await prefs.setString('pass', password);
+      Toast.show("Preferences have been saved", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    } else {
+      //delete preference
+      await prefs.setString('email', '');
+      await prefs.setString('pass', '');
+      setState(() {
+        _emailcontroller.text = '';
+        _passcontroller.text = '';
+        rememberMe = false;
+      });
+      Toast.show("Preferences have removed", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    }
+  } 
 }
 
   

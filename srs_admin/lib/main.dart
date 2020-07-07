@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srs_admin/Login.dart';
 import 'package:srs_admin/mainscreen.dart';
-import 'package:srs_admin/registeration.dart';
 
 void main() => runApp(MyApp());
 
@@ -63,7 +62,7 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
         setState(() {
           if (animation.value > 0.99) {
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => LoginPage()));
+                MaterialPageRoute(builder: (context) => HomePage()));
           }
         });
       });

@@ -3,19 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srs_admin/login.dart';
 import 'package:srs_admin/mainscreen.dart';
+import 'package:toast/toast.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {
   @override 
   _RegisterUserState createState() => _RegisterUserState();
-  const RegisterScreen({Key key}) : super (key: key);
 }
 
 class _RegisterUserState extends State<RegisterScreen> {
+  bool _isChecked = false;
+  String urlRegister = "http://itschizo.com/aidil_qayyum/srs/php/register_admin.php";
+
+  TextEditingController _namecontroller = new TextEditingController();
+  TextEditingController _useridcontroller = new TextEditingController();
+  TextEditingController _emailcontroller = new TextEditingController();
+  TextEditingController _passcontroller = new TextEditingController();
+  TextEditingController _phonecontroller = new TextEditingController();
+
   @override
-  void initState() {
-    super.initState();
-  }
-   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -29,7 +35,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                   child: Text(
                     'Signup',
                     style:
-                        TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -37,7 +43,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                   child: Text(
                     'Admin',
                     style:
-                        TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -45,7 +51,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                   child: Text(
                     '.',
                     style: TextStyle(
-                        fontSize: 60.0,
+                        fontSize: 50.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.lightBlue[300]),
                   ),
@@ -58,6 +64,8 @@ class _RegisterUserState extends State<RegisterScreen> {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    controller: _namecontroller,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         labelText: 'NAME',
                         labelStyle: TextStyle(
@@ -71,6 +79,8 @@ class _RegisterUserState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    controller: _useridcontroller,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         labelText: 'USER ID',
                         labelStyle: TextStyle(
@@ -82,6 +92,8 @@ class _RegisterUserState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    controller: _passcontroller,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         labelText: 'PASSWORD ',
                         labelStyle: TextStyle(
@@ -94,6 +106,8 @@ class _RegisterUserState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    controller: _emailcontroller,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         labelText: 'EMAIL',
                         labelStyle: TextStyle(
@@ -105,6 +119,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    controller: _phonecontroller,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         labelText: 'PHONE NUMBER',
@@ -123,8 +138,8 @@ class _RegisterUserState extends State<RegisterScreen> {
                         shadowColor: Colors.blueAccent,
                         color: Colors.lightBlueAccent,
                         elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: MaterialButton(
+                          onPressed: _onRegister,
                           child: Center(
                             child: Text(
                               'REGISTER',
@@ -163,6 +178,17 @@ class _RegisterUserState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
+                      Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Checkbox(
+                        value: _isChecked,
+                        onChanged: (bool value) {
+                          //_onChange(value);
+                        },
+                      ),
+                    ],
+                  ),
                     ],
                   )),
               // SizedBox(height: 15.0),
@@ -188,4 +214,40 @@ class _RegisterUserState extends State<RegisterScreen> {
               // )
             ]));
       }
-    }
+    void _onRegister() {
+    String name = _namecontroller.text;
+    String userid = _useridcontroller.text;
+    String email = _emailcontroller.text;
+    String phone = _phonecontroller.text;
+    String password = _passcontroller.text;
+
+    http.post(urlRegister, body: {
+      "name": name,
+      "userid" : userid,
+      "email": email,
+      "password": password,
+      "phone": phone,
+    }).then((res) {
+      if (res.body == "success") {
+        Navigator.pop(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => LoginPage()));
+        Toast.show("Registration success", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      } else {
+        Toast.show("Registration failed", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+    }).catchError((err) {
+      print(err);
+    });
+  }
+
+  //void _onChange(bool value) {
+  //  setState(() {
+  //    _isChecked = value;
+  //    //savepref(value);
+  //  });
+  //}
+}

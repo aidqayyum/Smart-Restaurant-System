@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srs_admin/admin.dart';
 import 'package:srs_admin/login.dart';
 import 'package:srs_admin/registeration.dart';
 
@@ -10,8 +11,15 @@ void main() {
     ),
   ));
 }
+class HomePage extends StatefulWidget {
+  final Admin admin;
 
-class HomePage extends StatelessWidget {
+  const HomePage({Key key, this.admin}) : super(key: key);
+
+  @override
+  _HomePage createState() => _HomePage();
+}
+class _HomePage extends State<HomePage> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
