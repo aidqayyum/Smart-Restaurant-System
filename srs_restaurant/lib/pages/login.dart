@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:srs_restaurant/mainscreen.dart';
-import 'package:srs_restaurant/registeration.dart';
+import 'package:srs_restaurant/pages/mainscreen.dart';
+import 'package:srs_restaurant/pages/registeration.dart';
 
 void main() => runApp(MyApp());
 

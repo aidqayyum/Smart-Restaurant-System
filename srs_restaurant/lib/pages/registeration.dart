@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:srs_restaurant/login.dart';
-import 'package:srs_restaurant/mainscreen.dart';
+import 'package:srs_restaurant/pages/login.dart';
+import 'package:srs_restaurant/pages/mainscreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override 

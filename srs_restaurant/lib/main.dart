@@ -1,39 +1,37 @@
+import 'package:srs_restaurant/pages/homepage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:srs_restaurant/Login.dart';
-import 'package:srs_restaurant/mainscreen.dart';
-import 'package:srs_restaurant/registeration.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.lightBlue[300]));
     return MaterialApp(
-      theme: new ThemeData(
-        primaryColor: Colors.lightBlue[300],
-        primarySwatch: Colors.pink,
-        accentColor: Colors.white,
-      ),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.reemKufiTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
       home: Scaffold(
-        backgroundColor: Colors.cyan[300],
+        backgroundColor: Colors.yellow[300],
         body: Center(
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  "assets/images/srs3.png",
+                  "assets/srs3.png",
                   scale: 5,
                 ),
                 SizedBox(
                   height: 100,
                 ),
                 ProgressIndicator(),
-                
               ],
             ),
           ),
