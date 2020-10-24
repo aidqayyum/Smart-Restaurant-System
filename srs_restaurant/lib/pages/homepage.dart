@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               child: _buildRightSection(),
             ),
             Container(
-              color: AppColors.greenColor,
+              color: AppColors.yellowColor,
               height: MediaQuery.of(context).size.height,
               width: 60,
               padding: EdgeInsets.only(top: 25),
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                               child: Container(
                                 width: 150,
                                 height: 60,
-                                color: AppColors.greenColor,
+                                color: AppColors.yellowColor,
                               ),
                             ),
                           ),
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
       ),
       padding: EdgeInsets.all(28),
       decoration: BoxDecoration(
-        color: AppColors.greenColor,
+        color: AppColors.yellowColor,
         borderRadius: BorderRadius.all(
           Radius.circular(32),
         ),
@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                 TextSpan(
                   text: "USER",
                   style: TextStyle(
-                    color: AppColors.greenColor,
+                    color: AppColors.yellowColor,
                     fontWeight: FontWeight.bold,
                     height: 1.5,
                   ),
@@ -393,7 +393,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: AppColors.greenLightColor,
+                color: AppColors.yellowLightColor,
                 borderRadius: BorderRadius.all(
                   Radius.circular(12),
                 ),

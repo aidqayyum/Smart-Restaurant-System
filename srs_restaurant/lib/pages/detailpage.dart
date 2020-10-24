@@ -14,7 +14,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greenColor,
+      backgroundColor: AppColors.yellowColor,
       body: Column(
         children: <Widget>[
           SizedBox(height: 25),
@@ -101,7 +101,7 @@ class _DetailPageState extends State<DetailPage> {
                         child: RaisedButton(
                           onPressed: () {},
                           padding: EdgeInsets.symmetric(vertical: 16),
-                          color: AppColors.greenColor,
+                          color: AppColors.yellowColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(18),
@@ -193,7 +193,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget _buildCounter() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.greenColor,
+        color: AppColors.yellowColor,
         borderRadius: BorderRadius.all(
           Radius.circular(12),
         ),
