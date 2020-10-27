@@ -4,6 +4,7 @@ import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/models/food_model.dart';
 import 'package:srs_restaurant/pages/detailpage.dart';
+import 'package:srs_restaurant/pages/profile.dart';
 import 'package:srs_restaurant/widgets/app_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -40,8 +41,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 40,
-                    height: 40,
+                    width: 60,
+                    height: 60,
+                    child: Container(
                     margin: EdgeInsets.only(top: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
@@ -51,11 +53,20 @@ class _HomePageState extends State<HomePage> {
                         image: ExactAssetImage("assets/profile.jpg"),
                       ),
                     ),
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                            },
+                    ),
+                    ),
                   ),
                   Container(
                     width: 40,
                     height: 40,
-                    margin: EdgeInsets.only(bottom: 16),
+                    margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -70,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: 10,
               child: Transform.rotate(
                 angle: -math.pi / 2,
                 alignment: Alignment.topLeft,
@@ -108,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                             child: Transform.rotate(
                               angle: math.pi / 2,
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 40),
+                                padding: const EdgeInsets.only(right:40),
                                 child: Icon(
                                   FlutterIcons.arrow,
                                   size: 16,
@@ -380,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                 TextSpan(
                   text: "USER",
                   style: TextStyle(
-                    color: AppColors.yellowColor,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     height: 1.5,
                   ),

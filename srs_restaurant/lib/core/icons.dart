@@ -11,4 +11,5 @@ class FlutterIcons {
   static const IconData search = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData shop = IconData(0xe835, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData left = IconData(0xf007, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home_rounded = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
