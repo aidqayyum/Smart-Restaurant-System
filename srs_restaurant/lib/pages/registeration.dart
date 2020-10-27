@@ -1,14 +1,22 @@
 
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srs_restaurant/core/consts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:toast/toast.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srs_restaurant/pages/login.dart';
 import 'package:srs_restaurant/pages/mainscreen.dart';
+import 'package:srs_restaurant/pages/profile.dart';
 
+File _image;
 class RegisterScreen extends StatefulWidget {
   @override 
   _RegisterUserState createState() => _RegisterUserState();
-  const RegisterScreen({Key key}) : super (key: key);
+  const RegisterScreen({Key key, File image}) : super (key: key);
 }
 
 class _RegisterUserState extends State<RegisterScreen> {
@@ -18,10 +26,10 @@ class _RegisterUserState extends State<RegisterScreen> {
   }
    @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-            Widget>[
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
+        children: <Widget>[
           Container(
             child: Stack(
               children: <Widget>[
@@ -40,12 +48,29 @@ class _RegisterUserState extends State<RegisterScreen> {
                     style: TextStyle(
                         fontSize: 80.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.lightBlue[300]),
+                        color: AppColors.yellowLightColor),
                   ),
-                )
+                ),
               ],
             ),
           ),
+          GestureDetector(
+            onTap: _choose,
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(
+                          "assets/profile.jpg"),
+                    //: _image == null
+                        //? AssetImage(pathAsset)
+                        //: FileImage(_image),
+                    fit: BoxFit.fill,
+                  )),
+            )),
+        Text('Click on image above to take profile picture'),
           Container(
               padding: EdgeInsets.only(top: 20.0, left: 25.0, right: 25.0),
               child: Column(
@@ -60,7 +85,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                         // hintText: 'EMAIL',
                         // hintStyle: ,
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent))),
+                            borderSide: BorderSide(color: AppColors.yellowColor))),
                   ),
                   SizedBox(height: 10.0),
                   TextField(
@@ -71,11 +96,12 @@ class _RegisterUserState extends State<RegisterScreen> {
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent))),
+                            borderSide: BorderSide(color: AppColors.yellowColor))),
                     obscureText: true,
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         labelText: 'EMAIL',
                         labelStyle: TextStyle(
@@ -83,18 +109,20 @@ class _RegisterUserState extends State<RegisterScreen> {
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent))),
+                            borderSide: BorderSide(color: AppColors.yellowColor))),
                   ),
                   SizedBox(height: 10.0),
                   TextField(
+                    //controller: _phcontroller,
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                        labelText: 'Phone Number',
+                        labelText: 'PHONE NUMBER',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent))),
+                            borderSide: BorderSide(color: AppColors.yellowColor))),
                   ),
                   SizedBox(height: 40.0),
                   Container(
@@ -102,7 +130,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
                         shadowColor: AppColors.yellowColor,
-                        color: Colors.lightBlueAccent,
+                        color: AppColors.yellowLightColor,
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {},
@@ -110,7 +138,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                             child: Text(
                               'REGISTER',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Montserrat'),
                             ),
@@ -134,7 +162,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => ProfilePage()));
                             },
                             child: Center(
                                   child: Text('Go Back',
@@ -146,27 +174,12 @@ class _RegisterUserState extends State<RegisterScreen> {
                       ),
                     ],
                   )),
-              // SizedBox(height: 15.0),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: <Widget>[
-              //     Text(
-              //       'New to Spotify?',
-              //       style: TextStyle(
-              //         fontFamily: 'Montserrat',
-              //       ),
-              //     ),
-              //     SizedBox(width: 5.0),
-              //     InkWell(
-              //       child: Text('Register',
-              //           style: TextStyle(
-              //               color: Colors.green,
-              //               fontFamily: 'Montserrat',
-              //               fontWeight: FontWeight.bold,
-              //               decoration: TextDecoration.underline)),
-              //     )
-              //   ],
-              // )
-            ]));
+                SizedBox(height: 20.0),
+            ])));
       }
+      void _choose() async {
+    _image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {});
+    //_image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  }
     }
