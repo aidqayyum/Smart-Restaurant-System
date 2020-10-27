@@ -19,7 +19,7 @@ class FoodModel {
   static List<FoodModel> list = [
     FoodModel(
       name: "Tacos Nanchas Choco",
-      price: 120,
+      price: 10,
       weight: 130,
       calory: 460,
       protein: 30,
@@ -29,7 +29,7 @@ class FoodModel {
     ),
     FoodModel(
       name: "Porata Masala",
-      price: 100,
+      price: 5,
       weight: 120,
       calory: 300,
       protein: 45,

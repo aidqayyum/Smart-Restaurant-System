@@ -2,6 +2,7 @@ import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/models/food_model.dart';
 import 'package:flutter/material.dart';
+import 'package:srs_restaurant/pages/cart.dart';
 
 class DetailPage extends StatefulWidget {
   final FoodModel data;
@@ -55,7 +56,7 @@ class _DetailPageState extends State<DetailPage> {
                   Text(
                     "${widget.data.name}",
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -65,7 +66,7 @@ class _DetailPageState extends State<DetailPage> {
                       Text(
                         "\$${widget.data.price.toInt()}",
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: AppColors.redColor,
                         ),
@@ -180,10 +181,18 @@ class _DetailPageState extends State<DetailPage> {
                 Radius.circular(12),
               ),
             ),
+            child: InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                     context,
+                     MaterialPageRoute(
+                      builder: (context) => OrderPage()));
+                      },
             child: Icon(
               FlutterIcons.shop,
               size: 16,
             ),
+          ),
           ),
         ],
       ),
@@ -226,5 +235,12 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
     );
+  }
+  void _onCart(){
+    Navigator.of(context).pop();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => OrderPage()));
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:srs_restaurant/core/icons.dart';
+import 'package:srs_restaurant/pages/cart.dart';
 import 'package:srs_restaurant/pages/login.dart';
 import 'package:srs_restaurant/pages/mainscreen.dart';
+import 'package:srs_restaurant/pages/registeration.dart';
 import 'package:srs_restaurant/widgets/list.dart';
 import 'package:srs_restaurant/widgets/button.dart';
 
@@ -33,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
           icon: Icon(FlutterIcons.shop,
           color: Colors.black),
-          onPressed: (){},
+          onPressed: _onCart,
           ),],
       ),
       backgroundColor: Colors.white,
@@ -182,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.grey,
                         ),
                         MaterialButton(
-                          onPressed: (){},
+                          onPressed: _gotoRegisterPage,
                           child:Text("Register",
                           style: TextStyle(fontSize: 16.0)
                           )),
@@ -223,7 +225,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Future.value(false);
   }
 
-    void _gotologinPage() {
+  void _gotologinPage() {
     // flutter defined function
     //print(widget.user.name);
     showDialog(
@@ -243,6 +245,48 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoginPage()));
+              },
+            ),
+            new FlatButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _onCart(){
+    Navigator.of(context).pop();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => OrderPage()));
+  }
+  
+  void _gotoRegisterPage() {
+    // flutter defined function
+    //print(widget.user.name);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Go to register page?"), //+ widget.user.name),
+          content: new Text("Are your sure?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Yes"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => RegisterScreen()));
               },
             ),
             new FlatButton(

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/models/food_model.dart';
+import 'package:srs_restaurant/pages/cart.dart';
 import 'package:srs_restaurant/pages/detailpage.dart';
 import 'package:srs_restaurant/pages/profile.dart';
 import 'package:srs_restaurant/widgets/app_clipper.dart';
@@ -431,18 +432,26 @@ class _HomePageState extends State<HomePage> {
           Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.yellowLightColor,
               borderRadius: BorderRadius.all(
                 Radius.circular(12),
               ),
             ),
+            child: InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                     context,
+                     MaterialPageRoute(
+                      builder: (context) => OrderPage()));
+                      },
             child: Center(
               child: Icon(
                 FlutterIcons.shop,
-                size: 16,
+                size: 20,
               ),
             ),
-          )
+            ),
+          ),
         ],
       ),
     );

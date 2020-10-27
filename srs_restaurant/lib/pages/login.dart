@@ -49,12 +49,12 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(190.0, 175.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.yellowLightColor)),
+                            color: AppColors.greenColor)),
                   )
                 ],
               ),
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     TextField(
                       decoration: InputDecoration(
-                          labelText: 'USER ID',
+                          labelText: 'EMAIL',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -93,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Forgot Password',
                           style: TextStyle(
-                              color: AppColors.yellowColor,
+                              color: AppColors.greenColor,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                               decoration: TextDecoration.underline),
@@ -105,9 +106,9 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: AppColors.yellowColor,
-                        color: AppColors.yellowLightColor,
-                        elevation: 7.0,
+                        shadowColor: AppColors.yellowLightColor,
+                        color: AppColors.yellowColor,
+                        elevation: 10.0,
                         child: GestureDetector(
                           onTap: () {},
                           child: Center(
@@ -115,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                               'LOGIN',
                               style: TextStyle(
                                   color: Colors.black,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Montserrat'),
                             ),
@@ -144,6 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             child:Center(
                                   child: Text('Go Back',
                                       style: TextStyle(
+                                        fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Montserrat'))),
                           ),
@@ -157,7 +160,9 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 Text(
                   'New to SRS ?',
-                  style: TextStyle(fontFamily: 'Montserrat'),
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 16),
                 ),
                 SizedBox(width: 5.0),
                 InkWell(
@@ -171,7 +176,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Register',
                     style: TextStyle(
-                        color: AppColors.yellowColor,
+                        color: AppColors.greenColor,
+                        fontSize: 16,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline),
