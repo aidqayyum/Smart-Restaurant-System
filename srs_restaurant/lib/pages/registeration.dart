@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/pages/login.dart';
 import 'package:srs_restaurant/pages/mainscreen.dart';
 
@@ -64,17 +65,6 @@ class _RegisterUserState extends State<RegisterScreen> {
                   SizedBox(height: 10.0),
                   TextField(
                     decoration: InputDecoration(
-                        labelText: 'USER ID',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent))),
-                  ),
-                  SizedBox(height: 10.0),
-                  TextField(
-                    decoration: InputDecoration(
                         labelText: 'PASSWORD ',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -111,7 +101,7 @@ class _RegisterUserState extends State<RegisterScreen> {
                       height: 40.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blueAccent,
+                        shadowColor: AppColors.yellowColor,
                         color: Colors.lightBlueAccent,
                         elevation: 7.0,
                         child: GestureDetector(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:srs_restaurant/pages/mainscreen.dart';
+import 'package:srs_restaurant/core/consts.dart';
+import 'package:srs_restaurant/pages/profile.dart';
 import 'package:srs_restaurant/pages/registeration.dart';
 
 void main() => runApp(MyApp());
@@ -52,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                             fontSize: 80.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue[300])),
+                            color: AppColors.yellowLightColor)),
                   )
                 ],
               ),
@@ -69,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blueAccent))),
+                              borderSide: BorderSide(color: AppColors.yellowLightColor))),
                     ),
                     SizedBox(height: 20.0),
                     TextField(
@@ -80,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blueAccent))),
+                              borderSide: BorderSide(color: AppColors.yellowLightColor))),
                       obscureText: true,
                     ),
                     SizedBox(height: 5.0),
@@ -91,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Forgot Password',
                           style: TextStyle(
-                              color: Colors.blueAccent,
+                              color: AppColors.yellowColor,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                               decoration: TextDecoration.underline),
@@ -103,8 +105,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blueAccent,
-                        color: Colors.lightBlueAccent,
+                        shadowColor: AppColors.yellowColor,
+                        color: AppColors.yellowLightColor,
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {},
@@ -112,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text(
                               'LOGIN',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Montserrat'),
                             ),
@@ -137,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => ProfilePage()));
                             },
                             child:Center(
                                   child: Text('Go Back',
@@ -169,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Register',
                     style: TextStyle(
-                        color: Colors.blueAccent,
+                        color: AppColors.yellowColor,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline),

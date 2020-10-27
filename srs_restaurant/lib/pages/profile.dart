@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:srs_restaurant/core/icons.dart';
+import 'package:srs_restaurant/pages/login.dart';
+import 'package:srs_restaurant/pages/mainscreen.dart';
 import 'package:srs_restaurant/widgets/list.dart';
 import 'package:srs_restaurant/widgets/button.dart';
 
@@ -14,6 +17,25 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.light,
+        elevation: 0,
+        backgroundColor: Colors.yellow,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: _onBackPressAppBar,
+        ),
+        actions: <Widget>[
+          IconButton(
+          icon: Icon(FlutterIcons.shop,
+          color: Colors.black),
+          onPressed: (){},
+          ),],
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
@@ -61,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Richmond Blankson",
+                        "User",
                         style: TextStyle(
                           fontSize: 16.0,
                         ),
@@ -70,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 10.0,
                       ),
                       Text(
-                        "+233247656959",
+                        "0123456789",
                         style: TextStyle(color: Colors.grey),
                       ),
                       SizedBox(
@@ -101,14 +123,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     children: <Widget>[
                       CustomListTile(
-                        icon: Icons.location_on,
-                        text: "Location",
-                      ),
-                      Divider(
-                        height: 10.0,
-                        color: Colors.grey,
-                      ),
-                      CustomListTile(
                         icon: Icons.visibility,
                         text: "Change Password",
                       ),
@@ -117,8 +131,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.grey,
                       ),
                       CustomListTile(
-                        icon: Icons.shopping_cart,
-                        text: "Shipping",
+                        icon: Icons.location_on,
+                        text: "Location",
                       ),
                       Divider(
                         height: 10.0,
@@ -127,77 +141,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       CustomListTile(
                         icon: Icons.payment,
                         text: "Payment",
-                      ),
-                      Divider(
-                        height: 10.0,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Text(
-                "Notifications",
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Card(
-                elevation: 3.0,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "App Notification",
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Switch(
-                            value: turnOnNotification,
-                            onChanged: (bool value) {
-                              // print("The value: $value");
-                              setState(() {
-                                turnOnNotification = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        height: 10.0,
-                        color: Colors.grey,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Location Tracking",
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Switch(
-                            value: turnOnLocation,
-                            onChanged: (bool value) {
-                              // print("The value: $value");
-                              setState(() {
-                                turnOnLocation = value;
-                              });
-                            },
-                          ),
-                        ],
                       ),
                       Divider(
                         height: 10.0,
@@ -228,13 +171,31 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("Language", style: TextStyle(fontSize: 16.0)),
+                        MaterialButton(
+                          onPressed: _gotologinPage,
+                          child:Text("Login",
+                          style: TextStyle(fontSize: 16.0)
+                          )),
                         // SizedBox(height: 10.0,),
                         Divider(
                           height: 30.0,
                           color: Colors.grey,
                         ),
-                        Text("Currency", style: TextStyle(fontSize: 16.0)),
+                        MaterialButton(
+                          onPressed: (){},
+                          child:Text("Register",
+                          style: TextStyle(fontSize: 16.0)
+                          )),
+                        // SizedBox(height: 10.0,),
+                        Divider(
+                          height: 30.0,
+                          color: Colors.grey,
+                        ),
+                        MaterialButton(
+                          onPressed: (){},
+                          child:Text("Exit",
+                          style: TextStyle(fontSize: 16.0)
+                          )),
                         // SizedBox(height: 10.0,),
                         Divider(
                           height: 30.0,
@@ -249,6 +210,50 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
+    );
+  }
+  Future<bool> _onBackPressAppBar() async {
+    Navigator.pop(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(
+            //user: widget.user,
+          ),
+        ));
+    return Future.value(false);
+  }
+
+    void _gotologinPage() {
+    // flutter defined function
+    //print(widget.user.name);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Go to login page?"), //+ widget.user.name),
+          content: new Text("Are your sure?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Yes"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPage()));
+              },
+            ),
+            new FlatButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
