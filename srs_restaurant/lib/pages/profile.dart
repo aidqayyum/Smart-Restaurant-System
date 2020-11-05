@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/pages/cart.dart';
 import 'package:srs_restaurant/pages/login.dart';
@@ -22,19 +23,19 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         brightness: Brightness.light,
         elevation: 0,
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
+            color: AppColors.blackColor,
           ),
           onPressed: _onBackPressAppBar,
         ),
         actions: <Widget>[
           IconButton(
           icon: Icon(FlutterIcons.shop,
-          color: Colors.black),
+          color: AppColors.blackColor),
           onPressed: _onCart,
           ),],
       ),
@@ -46,9 +47,9 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Profile",
+                "PROFILE",
                 style: TextStyle(
-                  fontSize: 32.0,
+                  fontSize: 35.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -87,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "User",
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 20.0,
                         ),
                       ),
                       SizedBox(
@@ -95,7 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         "0123456789",
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey),
                       ),
                       SizedBox(
                         height: 20.0,
@@ -111,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 "Account",
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -158,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 "Other",
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -176,7 +179,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         MaterialButton(
                           onPressed: _gotologinPage,
                           child:Text("Login",
-                          style: TextStyle(fontSize: 16.0)
+                          style: TextStyle(
+                            fontSize: 20.0)
                           )),
                         // SizedBox(height: 10.0,),
                         Divider(
@@ -186,7 +190,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         MaterialButton(
                           onPressed: _gotoRegisterPage,
                           child:Text("Register",
-                          style: TextStyle(fontSize: 16.0)
+                          style: TextStyle(
+                            fontSize: 20.0)
                           )),
                         // SizedBox(height: 10.0,),
                         Divider(
@@ -196,7 +201,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         MaterialButton(
                           onPressed: (){},
                           child:Text("Exit",
-                          style: TextStyle(fontSize: 16.0)
+                          style: TextStyle(
+                            fontSize: 20.0)
                           )),
                         // SizedBox(height: 10.0,),
                         Divider(

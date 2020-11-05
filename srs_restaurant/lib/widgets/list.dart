@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srs_restaurant/core/consts.dart';
 
 class CustomListTile extends StatelessWidget {
   
@@ -15,14 +16,14 @@ class CustomListTile extends StatelessWidget {
         children: <Widget>[
           Icon(
             icon,
-            color: Colors.yellow,
+            color: AppColors.yellowColor,
           ),
           SizedBox(
             width: 15.0,
           ),
           Text(
             "$text",
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: 20.0),
           ),
         ],
       ),

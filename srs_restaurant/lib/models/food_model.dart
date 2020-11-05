@@ -39,7 +39,7 @@ class FoodModel {
     ),
     FoodModel(
       name: "Taco Kebab",
-      price: 90,
+      price: 8,
       weight: 100,
       calory: 320,
       protein: 150,
@@ -49,7 +49,7 @@ class FoodModel {
     ),
     FoodModel(
       name: "Chicken Salad",
-      price: 50,
+      price: 15,
       weight: 30,
       calory: 65,
       protein: 50,
@@ -59,7 +59,7 @@ class FoodModel {
     ),
     FoodModel(
       name: "Chicken Eggs",
-      price: 20,
+      price: 5,
       weight: 30,
       calory: 120,
       protein: 310,

@@ -1,17 +1,20 @@
 import 'dart:ui';
-
+import 'package:srs_restaurant/widgets/app_clipper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'dart:math' as math;
 import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/models/food_model.dart';
 import 'package:srs_restaurant/pages/cart.dart';
 import 'package:srs_restaurant/pages/detailpage.dart';
 import 'package:srs_restaurant/pages/profile.dart';
-import 'package:srs_restaurant/widgets/app_clipper.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'dart:math' as math;
+import 'package:srs_restaurant/core/user.dart';
 
 class HomePage extends StatefulWidget {
+  final User user;
+
+  const HomePage({Key key, this.user}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
