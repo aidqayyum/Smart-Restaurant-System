@@ -265,7 +265,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
           _emcontroller.text = '';
           _phcontroller.text = '';
           _passcontroller.text = '';
-          //pr.dismiss();
+          pr.dismiss();
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
