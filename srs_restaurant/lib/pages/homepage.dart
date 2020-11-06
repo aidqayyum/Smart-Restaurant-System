@@ -14,7 +14,7 @@ import 'package:srs_restaurant/core/user.dart';
 class HomePage extends StatefulWidget {
   final User user;
 
-  const HomePage({Key key, this.user}) : super(key: key);
+  HomePage({Key key, this.user}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }

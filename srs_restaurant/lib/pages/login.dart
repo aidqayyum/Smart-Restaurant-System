@@ -226,8 +226,7 @@ class _LoginPageState extends State<LoginPage> {
         Toast.show(dres[0], context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         if (dres[0] == "success") {
-          pr.dismiss();
-          print("Radius:");
+          pr.hide();
           print(dres);
          User user = new User(name:dres[1],email: dres[2],phone:dres[3]);
           Navigator.push(
@@ -235,10 +234,10 @@ class _LoginPageState extends State<LoginPage> {
               MaterialPageRoute(
                   builder: (context) => HomePage(user: user)));
         } else {
-          pr.dismiss();
+          pr.hide();
         }
       }).catchError((err) {
-        pr.dismiss();
+        pr.hide();
         print(err);
       });
     } else {}

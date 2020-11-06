@@ -1,4 +1,17 @@
+import 'dart:io';
+import 'dart:math';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:srs_restaurant/core/user.dart';
+import 'package:toast/toast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:random_string/random_string.dart';
 import 'package:srs_restaurant/core/consts.dart';
 import 'package:srs_restaurant/core/icons.dart';
 import 'package:srs_restaurant/pages/cart.dart';
@@ -8,14 +21,32 @@ import 'package:srs_restaurant/pages/registeration.dart';
 import 'package:srs_restaurant/widgets/list.dart';
 import 'package:srs_restaurant/widgets/button.dart';
 
+String urlgetuser = "http://itschizo.com/aidil_qayyum/srs2/php/get_user.php";
+String urluploadImage =
+    "http://itschizo.com/aidil_qayyum/srs2/php/upload_imageprofile.php";
+File _image;
+int number = 0;
+String _value;
+
 class ProfilePage extends StatefulWidget {
+  final User user;
+
+  ProfilePage({this.user});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool turnOnNotification = false;
+
   bool turnOnLocation = false;
+  @override
+  void initState() {
+    super.initState();
+    //refreshKey = GlobalKey<RefreshIndicatorState>();
+    //_getCurrentLocation();
+  }
+
 
   @override
   Widget build(BuildContext context) {

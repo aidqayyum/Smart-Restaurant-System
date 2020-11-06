@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -59,6 +58,7 @@ class _RegisterUserState extends State<RegisterScreen> {
   }
   
   Future<bool> _onBackPressAppBar() async {
+    _image = null;
     Navigator.pop(
         context,
         MaterialPageRoute(
@@ -127,6 +127,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
                     controller: _namecontroller,
                     decoration: InputDecoration(
                         labelText: 'NAME',
+                        icon: Icon(Icons.person),
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -143,6 +144,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         labelText: 'EMAIL',
+                        icon: Icon(Icons.email),
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -156,6 +158,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
                     controller: _passcontroller,
                     decoration: InputDecoration(
                         labelText: 'PASSWORD ',
+                        icon: Icon(Icons.lock),
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -171,6 +174,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         labelText: 'PHONE NUMBER',
+                        icon: Icon(Icons.phone),
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -222,8 +226,10 @@ class RegisterWidgetState extends State<RegisterWidget> {
             ]);
       }
   void _choose() async {
+    // ignore: deprecated_member_use
     //_image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {});
+    // ignore: deprecated_member_use
     _image = await ImagePicker.pickImage(source: ImageSource.gallery);
   }
   
@@ -232,12 +238,13 @@ class RegisterWidgetState extends State<RegisterWidget> {
     print(_image.toString());
     uploadData();
   }
-  void uploadData() {
+
+  Future <void> uploadData() async{
     _name = _namecontroller.text;
     _email = _emcontroller.text;
     _password = _passcontroller.text;
     _phone = _phcontroller.text;
-
+    print(_image);
     if ((_isEmailValid(_email)) &&
         (_password.length > 5) &&
         (_image != null) &&
@@ -245,7 +252,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "Registration in progress");
-      pr.show();
+      await pr.show();
 
       String base64Image = base64Encode(_image.readAsBytesSync());
       http.post(urlUpload, body: {
@@ -254,7 +261,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
         "email": _email,
         "password": _password,
         "phone": _phone,
-      }).then((res) {
+        }).then((res) {
         print(res.statusCode);
         if (res.body == "success") {
           Toast.show(res.body, context,
@@ -265,7 +272,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
           _emcontroller.text = '';
           _phcontroller.text = '';
           _passcontroller.text = '';
-          pr.dismiss();
+          pr.hide();
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -279,6 +286,46 @@ class RegisterWidgetState extends State<RegisterWidget> {
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
+    /*ProgressDialog pr = new ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible: false);
+    await pr.show();
+
+    _name = _namecontroller.text;
+    _email = _emcontroller.text;
+    _password = _passcontroller.text;
+    _phone = _phcontroller.text;
+    print(_image);
+    if ((_image == null) ||
+        (!_isEmailValid(_email)) ||
+        (_password.length < 5) ||
+        (_phone.length < 5)) {
+      Toast.show("Invalid Registration Data", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+      return;
+    }
+    String base64Image = base64Encode(_image.readAsBytesSync());
+    http.post(urlUpload, body: {
+      "encoded_string": base64Image,
+      "name": _name,
+      "email": _email,
+      "password": _password,
+      "phone": _phone,
+    }).then((res) {
+      print(res.statusCode);
+      print(res.body);
+      _image = null;
+      _namecontroller.text='';
+      _emcontroller.text = '';
+      _phcontroller.text = '';
+      _passcontroller.text = '';
+      Toast.show(res.body, context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+    }).catchError((err) {
+      print(err);
+    });
+   await pr.hide();
+  }*/
 
   bool _isEmailValid(String email) {
     return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
